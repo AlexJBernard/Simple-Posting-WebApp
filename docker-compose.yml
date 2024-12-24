@@ -1,0 +1,42 @@
+name: simpleWebApplication
+services:
+# Web Application
+  vue_app:
+    build: ./vueapp
+    container_name: vue_app
+    restart: "no"
+    ports:
+      - "8080:8080"
+    links:
+      - php_api
+    environment:
+      docker: "true"
+  
+  # PHP Api
+  php_api:
+    build: ./phpapi
+    container_name: php_api
+    restart: "no"
+    ports:
+      - "81:80"
+      - "433:433"
+    volumes:
+      - "./phpapi/logs:/var/www/html/phpapi/logs"
+    environment:
+      docker: "true"
+  
+  # PHP Database  
+  php_database:
+    image: mysql:latest
+    container_name: php_database
+    restart: "no"
+    ports:
+      - 3307:3306
+    volumes:
+      - "./testDatabase/schema:/docker-entrypoint-initdb.d"
+      #- ./testDatabase/data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=r00T
+      - MYSQL_DATABASE=databasePhp
+      - MYSQL_USER=username
+      - MYSQL_PASSWORD=password
