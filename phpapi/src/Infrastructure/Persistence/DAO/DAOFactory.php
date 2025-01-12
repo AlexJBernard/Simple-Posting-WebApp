@@ -18,6 +18,10 @@ class DAOFactory {
         return new UserDAO($this->DBPool);
     }
 
+    function getPostDAO(): PostDAO {
+        return new PostDAO($this->DBPool);
+    }
+
     public function __get($property): DAO {
         $className = 'SDC\\API\\Infrastructure\\Persistence\\DAO\\'.$property;
 

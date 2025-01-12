@@ -7,8 +7,14 @@ use App\Domain\Models\User;
 
 class UserDAO extends DAO {
 
+    /**
+     * SQL Query used to select a result from the user table
+     */
     private $BaseQuery = "SELECT * FROM users ";
 
+    /**
+     * Returns user information based on the given id
+     */
     function getById($userId) {
         $DBConn = $this->DBPool->request();
         $DBConn->query($this->BaseQuery . "WHERE user_id = ?",
@@ -24,21 +30,23 @@ class UserDAO extends DAO {
         return $User;
     }
 
+    /**
+     * Returns a full list of users from the User Database
+     */
     function getAll() {
         $DBConn = $this->DBPool->request();
-        $DBConn->query($this->BaseQuery);
-        $Users = 0;
-        if ($DBConn->nextRow()) {
-            $Users = 1;
-        }
-        $this->DBPool->release($DBConn);
+        $UserIterator = $this->getIterator("");
+        $Users = $UserIterator->toArray();
         return $Users;
     }
 
     /**
-     * 
+     * Creates an Iterator for the result of the given SQL query
+     * @param appendQuery String appended to the end of the program's base query
      */
-    function getIterator() {
+    function getIterator($appendQuery) {
         $DBConn = $this->DBPool->request();
+        $DBConn->query($this->BaseQuery . $appendQuery);
+        return new DBIterator($DBConn, "User");
     }
 }

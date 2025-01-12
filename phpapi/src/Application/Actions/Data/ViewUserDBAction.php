@@ -13,19 +13,16 @@ use Psr\Http\Message\ResponseInterface as Response;
 class ViewUserDBAction extends DatabaseAction {
 
   protected function action(): Response {
-    //if (empty($_REQUEST['id'])) {
-      
-    //  return $this->response();
-    //}
-
-    //$userId = $_REQUEST['id'];
+    
     $UserDAO = $this->DAOFactory->getUserDAO();
     $response = [
-      'message' => 'Message Error'
+      'message' => 'DAO Error'
     ];
-    if ($UserDAO->getAll() > 0) {
-      $response['message'] = 'Response Recieved';
+    $Users = $UserDAO->getAll();
+    if ($Users) {
+      return $this->respondWithData($Users);
+    } else {
+      return $this->respondWithData($response, 404);
     }
-    return $this->respondWithData($response);
   }
 }

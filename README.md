@@ -24,7 +24,11 @@ docker-compose up -d
 ```
 
 ## Running Vue Application
-To be added.
+Run the command line terminal from the `/vueapp` directory.
+```bash
+npm install
+npm run dev
+```
 
 ## Running API Program
 Run the command line terminal from the `/phpSide` directory.

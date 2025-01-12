@@ -7,4 +7,8 @@ CREATE TABLE IF NOT EXISTS `databasePhp`.`users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE = innoDB DEFAULT CHARSET=utf8mb4;
 
-
+CREATE TABLE IF NOT EXISTS `databasePhp`.`posts` (
+  post_id int NOT NULL AUTO_INCREMENT,
+  post_text varchar(255) NOT NULL,
+  PRIMARY KEY (`post_id`)
+) ENGINE = innoDB DEFAULT CHARSET=utf8mb4;

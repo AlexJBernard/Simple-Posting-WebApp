@@ -4,8 +4,13 @@ declare(strict_types=1);
 
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
+// User Database actions
 use App\Application\Actions\Data\ViewUserDBAction;
 use App\Application\Actions\Data\ViewUserIdDBAction;
+
+// Post Actions
+use App\Application\Actions\Data\CreatePostDBAction;
+use App\Application\Actions\Data\ViewPostDBAction;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -34,5 +39,10 @@ return function (App $app) {
     $app->group('/usersdb', function (Group $group) {
         $group->get('', ViewUserDBAction::class);
         $group->get('/{id}', ViewUserIdDBAction::class);
+    });
+
+    $app->group('/post', function (Group $group) {
+        $group->get('', ViewPostFormAction::class);
+        $group->post('', CreatePostDBAction::class);
     });
 };

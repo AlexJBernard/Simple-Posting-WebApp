@@ -30,9 +30,11 @@
 </script>
 
 <template>
-  <h1>Test</h1>
+  <h1>User Database</h1>
   <div class="users">
-    <span>Check console</span>
+    <ul v-for="user in users" :key="user.id">
+      <li>{{ user.firstname }} {{ user.lastname }}</li>
+    </ul>
   </div>
 </template>
 
