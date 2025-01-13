@@ -1,16 +1,41 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref, onMounted } from 'vue'
   import PostService from '../services/PostService.js'
+  import PostList from '../components/PostList.vue'
 
   const postText = ref("");
+  const allPosts = ref([]);
+  const isSent = ref(false);
 
-  async function submitForm() {
-    console.log(postText.value)
-    PostService.postPost(postText.value)
-    .then(() => {
-      console.log("Exit success");
+  onMounted(() => {
+    PostService.getPosts()
+    .then((posts) => {
+      allPosts.value = posts.data.data;
     }).catch((error) => {
       console.log(error);
+    })
+  });
+
+  async function updatePosts() {
+    PostService.getPosts()
+    .then((posts) => {
+      allPosts.value = posts.data.data;
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  async function submitForm() {
+    isSent.value = true
+    console.log(postText.value);
+    PostService.postPost(postText.value)
+    .then(() => {
+      postText.value = "";
+      updatePosts();
+      isSent.value = false;
+    }).catch((error) => {
+      console.log(error);
+      isSent.value = false;
     });
 
   }
@@ -18,9 +43,24 @@
 </script>
 
 <template>
-  <h1>Create Post</h1>
-  <form @submit.prevent="submitForm">
-    <textarea v-model="postText"></textarea>
-    <button type="submit">Submit</button>
-  </form>
+  <div class="postwrapper">
+
+  </div>
+  <div>
+    <h1>Create Post</h1>
+    <form @submit.prevent="submitForm">
+      <textarea v-model="postText"></textarea>
+      <button v-show="{ isSent }" type="submit">Submit</button>
+    </form>
+  </div>
+  <div>
+    <PostList :posts=allPosts />
+  </div>
 </template>
+
+<style>
+.postwrapper {
+  display:flex;
+  flex-direction:row;
+}
+</style>

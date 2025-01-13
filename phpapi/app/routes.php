@@ -10,7 +10,7 @@ use App\Application\Actions\Data\ViewUserIdDBAction;
 
 // Post Actions
 use App\Application\Actions\Data\CreatePostDBAction;
-use App\Application\Actions\Data\ViewPostDBAction;
+use App\Application\Actions\Data\ViewPostsAction;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -42,7 +42,7 @@ return function (App $app) {
     });
 
     $app->group('/post', function (Group $group) {
-        $group->get('', ViewPostFormAction::class);
+        $group->get('', ViewPostsAction::class);
         $group->post('', CreatePostDBAction::class);
     });
 };

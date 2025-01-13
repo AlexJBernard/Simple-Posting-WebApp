@@ -15,18 +15,26 @@ class CreatePostDBAction extends DatabaseAction {
     $PostDAO = $this->DAOFactory->getPostDAO();
 
     $response = [
-      'message' => 'DAO Error'
+      'message' => 'ERROR: Empty Post'
     ];
-
-    $output = implode(',', $_REQUEST);
-    echo "<script>console.log('" . $output . "');</script>";
+    $statusCode = 400;
 
     $body = $this->request->getparsedbody();
 
-    if (! empty($body)) {
-      $PostDAO->post($body['postText']);
+    if (!empty($body) && array_key_exists('postText', $body) ) {
+      $postText = $body['postText'];
+      
+      if (gettype($postText) !== "string") {
+        $response['message'] = 'ERROR: Invalid type';
+      } else if (strlen($postText) == 0) {
+        $response['message'] = "ERROR: Empty post text";
+      } else {
+        $response['message'] = $PostDAO->post($body['postText']);
+        $statusCode = 200;
+      }
+      
     }
     
-    return $this->respondWithData($response);
+    return $this->respondWithData($response, $statusCode);
   }
 }

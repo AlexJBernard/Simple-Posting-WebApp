@@ -31,13 +31,13 @@ class PostDAO extends DAO {
     }
 
     /**
-     * Returns a full list of users from the User Database
+     * Returns an array of all Posts from the post database
      */
     function getAll() {
         $DBConn = $this->DBPool->request();
         $PostIterator = $this->getIterator("");
-        $Posts = $PostsIterator->toArray();
-        return $Users;
+        $Posts = $PostIterator->toArray();
+        return $Posts;
     }
 
     // POST REQUESTS

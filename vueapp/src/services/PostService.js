@@ -18,5 +18,12 @@ export default {
     return apiClient.post('/post', {
       "postText": postText
     });
+  },
+
+  /**
+   *
+   */
+  getPosts() {
+    return apiClient.get('/post');
   }
 }
