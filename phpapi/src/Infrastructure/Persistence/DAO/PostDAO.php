@@ -10,7 +10,8 @@ class PostDAO extends DAO {
     /**
      * SQL Query used to select a result from the posts table
      */
-    private $BaseQuery = "SELECT * FROM posts ";
+    private $BaseQuery = "SELECT * FROM posts 
+    JOIN users ON posts.post_user_id=user_id ";
 
     /**
      * Returns post information based on the given id
@@ -43,12 +44,14 @@ class PostDAO extends DAO {
     // POST REQUESTS
     /**
      * @param text The content's of the user's post
+     * @param user The user posting the given comment
      */
-    function post($text) {
+    function post($text, $user) {
         $DBConn = $this->DBPool->request();
-        $DBConn->query("INSERT INTO posts (post_text) VALUES (?)",
+        $DBConn->query("INSERT INTO posts (post_text, post_user_id) VALUES (?, ?)",
         array(
-            array("value" => $text, "type" => \PDO::PARAM_STR)
+            array("value" => $text, "type" => \PDO::PARAM_STR),
+            array("value" => $user->id, "type" => \PDO::PARAM_INT)
         ));
         $postId = $DBConn->lastInsertID();
         $this->DBPool->release($DBConn);

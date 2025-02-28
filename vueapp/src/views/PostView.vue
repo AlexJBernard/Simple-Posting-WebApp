@@ -2,6 +2,7 @@
   import { ref, onMounted } from 'vue'
   import PostService from '../services/PostService.js'
   import PostList from '../components/PostList.vue'
+  import { CurrentUser} from '../state/CurrentUser.js'
 
   const postText = ref("");
   const allPosts = ref([]);
@@ -10,6 +11,7 @@
   onMounted(() => {
     PostService.getPosts()
     .then((posts) => {
+      // Initialize allPosts value as the posts retrived from the API
       allPosts.value = posts.data.data;
     }).catch((error) => {
       console.log(error);
@@ -28,7 +30,7 @@
   async function submitForm() {
     isSent.value = true
     console.log(postText.value);
-    PostService.postPost(postText.value)
+    PostService.postPost(postText.value, CurrentUser.userId)
     .then(() => {
       postText.value = "";
       updatePosts();

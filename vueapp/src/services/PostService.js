@@ -14,9 +14,10 @@ export default {
    *
    * @returns A promise containing the result of the user's post request
    */
-  postPost(postText) {
+  postPost(postText, userId) {
     return apiClient.post('/post', {
-      "postText": postText
+      "postText": postText,
+      "userId": userId
     });
   },
 

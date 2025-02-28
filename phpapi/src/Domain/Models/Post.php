@@ -11,16 +11,21 @@ class Post extends DomainModel {
   // Post Text
   public $text = null;
 
+  // User responsible for posting
+  public $User = null;
+
   function __construct($data) {
-    $this->JSONFields = array("id", "text");
+    $this->JSONFields = array("id", "text", "User");
     if(is_array($data)) { // FROM DATABASE
       $this->id = (int)$data['post_id'];
       $this->text = $data['post_text'];
+      $this->User = new User($data);
     } elseif(is_object($data)) { // FROM OBJECT
       if(isset($data->id)) {
         $this->id = $data->id;
       }
       $this->text = $data->text;
+      $this->User = $data->User;
     }
   }
 
@@ -36,6 +41,9 @@ class Post extends DomainModel {
         break;
       case "text":
         return $this->text;
+        break;
+      case "user":
+        return $this->User;
         break;
     }
   }
