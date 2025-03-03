@@ -12,5 +12,9 @@ export const CurrentUser = reactive({
    */
   changeUser(userId) {
     this.userId = userId;
+  },
+
+  getUser() {
+    return this.userId
   }
 });

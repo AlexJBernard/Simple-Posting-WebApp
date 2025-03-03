@@ -16,14 +16,8 @@ class ViewUserIdDBAction extends DatabaseAction {
     $response = [
       'message' => 'Message Error'
     ];
+    $userId = $this->request->getAttribute('id');
 
-    // ERROR CHECK: No ID given
-    if (empty($_REQUEST['id'])) {
-      $response['message'] = 'No id';
-      return $this->respondWithData($response);
-    }
-
-    $userId = $_REQUEST['id'];
     $UserDAO = $this->DAOFactory->getUserDAO();
     $User = $UserDAO->getById($userId);
     if ($User) {

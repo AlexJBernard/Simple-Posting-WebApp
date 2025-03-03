@@ -14,11 +14,18 @@ export default {
     console.log(import.meta.env.API_HOSTNAME)
     return apiClient.get('/usersdb');
   },
-  getUser() {
-    return apiClient.get('/usersdb/1', {
-      params: {
-        id: '1'
-      }
-    });
+  getUser(id) {
+    console.log(id)
+    if (typeof(id) == "number") {
+      return apiClient.get('/usersdb/' + id, {
+        id: id
+      });
+    } else {
+      return apiClient.get('/usersdb/1', {
+        params: {
+          id: '1'
+        }
+      });
+    }
   }
 }

@@ -1,9 +1,10 @@
 <script setup>
   import { ref, onMounted } from 'vue'
   import UserServiceDB from '../services/UserServiceDB.js'
+  import { CurrentUser } from '../state/CurrentUser.js'
 
   const users = ref(null)
-  const singleuser = ref(null)
+  const selectUser = ref(null)
 
   onMounted(() => {
     UserServiceDB.getUsers().then(
@@ -16,25 +17,31 @@
         console.log(error)
       }
     );
-    UserServiceDB.getUser().then(
+  })
+
+  async function swapUsers() {
+    console.log(selectUser.value)
+    UserServiceDB.getUser(selectUser.value).then(
       (response) => {
-        singleuser.value = response.data.data
-        console.log(response)
+        const user = response.data.data.user;
+        console.log(user)
+        CurrentUser.changeUser(user.id)
+        console.log(CurrentUser)
       }
     ).catch(
       (error) => {
         console.log(error)
       }
-    );
-  })
+    )
+  }
 </script>
 
 <template>
   <h1>User Database</h1>
   <div class="users">
-    <ul v-for="user in users" :key="user.id">
-      <li>{{ user.firstname }} {{ user.lastname }}</li>
-    </ul>
+    <select name="User" id="UserList" v-model="selectUser" v-on:change="swapUsers()">
+      <option v-for="user in users" :key="user.id" :value="user.id">{{ user.username }}</option>
+    </select>
   </div>
 </template>
 

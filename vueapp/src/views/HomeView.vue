@@ -3,9 +3,9 @@
 
 <template>
   <main>
-    <p>Home View! Testing...</p>
+    <p>The One Page Forum!</p>
     <div>
-      <p>Still testing</p>
+      <p>Don't know what you're expecting here.</p>
     </div>
   </main>
 </template>

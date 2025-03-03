@@ -1,8 +1,10 @@
 <script setup>
   import { ref, onMounted } from 'vue'
   import UserService from '../services/UserService.js'
+  import { CurrentUser } from '../state/CurrentUser.js'
 
   const users = ref(null)
+  const selectUser = ref(0);
 
   onMounted(() => {
     UserService.getUsers().then(
@@ -20,14 +22,25 @@
       }
     )
   })
+
+  async function swapUsers() {
+    UserService.getUser(selectUser.value).then(
+      (response) => {
+        const user = response.data.data;
+        CurrentUser.changeUser(user)
+      }
+    )
+  }
+
+
 </script>
 
 <template>
-  <h1>User List</h1>
+  <h1>CHARACTER SELECT</h1>
   <div class="users">
-    <ul>
-      <li v-for="user in users" :key="user.id">{{user.username}}</li>
-    </ul>
+    <select name="User" id="UserList" v-model="selectUser" v-on:change="swapUsers()">
+      <option v-for="user in users" :key="user.id" :value="user.id">{{ user.username }}</option>
+    </select>
   </div>
 </template>
 
