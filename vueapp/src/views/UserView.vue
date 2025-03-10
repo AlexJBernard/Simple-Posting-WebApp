@@ -1,7 +1,16 @@
 <script setup>
+  // Vue imports
   import { ref, onMounted } from 'vue'
+  import { useRoute } from 'vue-router'
+
+  // JavaScript files
   import UserServiceDB from '../services/UserServiceDB.js'
   import { CurrentUser } from '../state/CurrentUser.js'
+  import { CurrentRoute } from '../state/CurrentRoute'
+
+  onMounted(() => {
+    CurrentRoute.setRoute(useRoute().name)
+  })
 
   const users = ref(null)
   const selectUser = ref(null)
@@ -10,11 +19,10 @@
     UserServiceDB.getUsers().then(
       (response) => {
         users.value = response.data.data
-        console.log(response)
       }
     ).catch(
       (error) => {
-        console.log(error)
+        console.log(error.message)
       }
     );
   })
@@ -24,13 +32,11 @@
     UserServiceDB.getUser(selectUser.value).then(
       (response) => {
         const user = response.data.data.user;
-        console.log(user)
         CurrentUser.changeUser(user.id)
-        console.log(CurrentUser)
       }
     ).catch(
       (error) => {
-        console.log(error)
+        console.log(error.message)
       }
     )
   }

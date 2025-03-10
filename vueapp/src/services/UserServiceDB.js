@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+/**
+ * Axios connection to the application's backend program.
+ */
 const apiClient = axios.create({
   baseURL: 'http://localhost:81',
   withCredentials: false,

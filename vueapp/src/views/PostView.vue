@@ -1,20 +1,31 @@
 <script setup>
+  // Vue imports
   import { ref, onMounted } from 'vue'
-  import PostService from '../services/PostService.js'
+  import { useRoute } from 'vue-router'
+
+  // Vue components
   import PostList from '../components/PostList.vue'
-  import { CurrentUser} from '../state/CurrentUser.js'
+
+  // JavaScript Files
+  import PostService from '../services/PostService.js'
+
+  // JavaScript classes
+  import { CurrentUser } from '../state/CurrentUser.js'
+  import { CurrentRoute } from '../state/CurrentRoute.js'
 
   const postText = ref("");
   const allPosts = ref([]);
   const isSent = ref(false);
 
   onMounted(() => {
+    CurrentRoute.setRoute(useRoute().name)
+
     PostService.getPosts()
     .then((posts) => {
       // Initialize allPosts value as the posts retrived from the API
       allPosts.value = posts.data.data;
     }).catch((error) => {
-      console.log(error);
+      console.log(error.message);
     })
   });
 

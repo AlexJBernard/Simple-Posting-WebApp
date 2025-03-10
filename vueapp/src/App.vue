@@ -1,20 +1,52 @@
 <script setup>
-import {RouterLink, RouterView} from 'vue-router'
+import { ref, watch } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+
+import { CurrentRoute } from './state/CurrentRoute.js'
+
+
+const onHome = ref(true)
+watch(CurrentRoute, (route) => {
+  onHome.value = route.routeName == 'home' || route.routeName == 'about'
+})
+
 </script>
 
 <template>
-  <div class = "wrapper">
-    <header>
-      <h1>Simple Web Application</h1>
-      <h2>By: Alex Bernard</h2>
-    </header>
-    <nav>
-      <RouterLink to="/">Home!</RouterLink>
-      <RouterLink to="/usersdb">Users</RouterLink>
-      <RouterLink to="/posts">Posts</RouterLink>
+  <body class="wrapper">
+  <div class="heading-bar">
+    <div class="heading-title">
+      <h3>The Single Page Forum</h3>
+    </div>
+    <nav class="heading-nav">
+      <RouterLink class="router-item" to="/">Home</RouterLink>
+      <RouterLink class="router-item" to="/about">About</RouterLink>
+      <RouterLink class="router-item" to="/users">Users</RouterLink>
+      <RouterLink class="router-item" to="/posts">Posts</RouterLink>
     </nav>
-    <RouterView />
   </div>
+  <main class = "wrapper-view">
+    <div class="wrapper-item" v-if="!onHome">
+      <h2><u>The One Page Forum!</u></h2>
+      <div>
+        <p>Don't know what you're expecting here.</p><br />
+        <h3>Users</h3>
+        <p>
+          Displays the available list of user accounts.
+        </p>
+        <h3>Posts</h3>
+        <p>
+          Displays all posts made to the post database.
+        </p>
+
+      </div>
+    </div>
+    <div class="wrapper-item">
+      <RouterView />
+    </div>
+  </main>
+
+  </body>
 </template>
 
 <style scoped>
@@ -23,5 +55,62 @@ import {RouterLink, RouterView} from 'vue-router'
   flex-direction: column;
   place-items: flex-start;
   flex-wrap: wrap;
+}
+
+.wrapper-view {
+  width:100%;
+
+  display: flex;
+  flex-direction: row;
+  place-items: flex-start;
+  justify-content:space-between;
+  align-items:stretch;
+}
+
+.wrapper-item {
+  flex: 1 1;
+}
+
+.heading-bar {
+  position: sticky;
+  top:0;
+  width:100%;
+  background-color:azure;
+
+  /* FLEX SETTINGS */
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items:baseline;
+}
+
+.heading-title {
+  flex:1 1;
+}
+
+.heading-nav {
+  flex:1 1;
+
+  /* FLEX SETTINGS */
+  display: flex;
+  flex-direction: row;
+  align-items:flex-end;
+}
+
+.router-item {
+  margin-right:5%;
+
+  padding-top: 2%;
+  padding-bottom: 2%;
+  padding-left: 5%;
+  padding-right: 5%;
+
+  /* BORDER SETTINGS */
+  border-width:3px;
+  border-style:solid;
+  border-color:black;
+
+  /* FLEX SETTINGS */
+  align-self:flex-end;
 }
 </style>
