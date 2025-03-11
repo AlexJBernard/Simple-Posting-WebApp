@@ -1,4 +1,4 @@
-# real-world-vue
+# Simple Posting WebApp (Front-End)
 
 This template should help get you started developing with Vue 3 in Vite.
 
