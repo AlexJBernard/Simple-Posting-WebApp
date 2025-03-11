@@ -5,26 +5,19 @@
 
   // JavaScript files
   import UserServiceDB from '../services/UserServiceDB.js'
+  import UserService from '../services/UserService.js'
   import { CurrentUser } from '../state/CurrentUser.js'
   import { CurrentRoute } from '../state/CurrentRoute'
-
-  onMounted(() => {
-    CurrentRoute.setRoute(useRoute().name)
-  })
 
   const users = ref(null)
   const selectUser = ref(null)
 
-  onMounted(() => {
-    UserServiceDB.getUsers().then(
-      (response) => {
-        users.value = response.data.data
-      }
-    ).catch(
-      (error) => {
-        console.log(error.message)
-      }
-    );
+  onMounted(async () => {
+    // Change the current route name
+    CurrentRoute.setRoute(useRoute().name)
+
+    // UserService (fetchAPI)
+    users.value = await UserService.getUsers()
   })
 
   async function swapUsers() {
