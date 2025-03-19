@@ -4,8 +4,22 @@ Runs a single-page web application made using PHP, Vue, and MySQL.
 
 Was created using the PHP-Slim skeleton and Vue's Scaffolding for Single Page Applications.
 
+**WARNING:** This project may be in continuous development, and as such, certain sections may be incomplete or outdated.
+
 ## Purpose
-The following program was made for me to practice and learn more about using PHP, Vue, MySQL, and Docker.
+The following program was made for me to practice and learn more about using PHP, Vue, MySQL, and 
+Docker. While the project's scope is limited, I aim to to add on features that will challenge my
+current understanding of each tool over time.
+
+During my senior year at NC State University, I was tasked with making a web application for the 
+college's Computer Science department. This project made use of the school's authentication program 
+Shibboleth, along with a list of existing usernames and ids for several staff members. Due to the 
+potential sensitivity of this information, I beleved it was prudent to not use this project as an
+example of portfolio work. However, this left me with no projects of my own to prove or
+demonstrate my current proficiency with PHP, Apache, or Docker. Because of this, I opted to create
+an application that makes use of several of the same techniques used on my previous project,
+alongside other frameworks and practices I have not used prior. While this project serves no
+pratical service, I hope it is sufficient as a demonstration of technical skill.
 
 ## Running Program
 The following project can be run either by using Docker, or by running each component individually.
