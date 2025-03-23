@@ -4,7 +4,8 @@ Runs a single-page web application made using PHP, Vue, and MySQL.
 
 Was created using the PHP-Slim skeleton and Vue's Scaffolding for Single Page Applications.
 
-**WARNING:** This project may be in continuous development, and as such, certain sections may be incomplete or outdated.
+**WARNING:** This project may be in continuous development, and as such, certain sections may be 
+incomplete or outdated.
 
 ## Purpose
 The following program was made for me to practice and learn more about using PHP, Vue, MySQL, and 
@@ -25,10 +26,20 @@ pratical service, I hope it is sufficient as a demonstration of technical skill.
 The following project can be run either by using Docker, or by running each component individually.
 
 ### Running From Docker
+#### Settings.php (phpapp)
+The project uses the `app/settings.php` file to store the necessary information needed to connect 
+to the application's ddatabase. Due to the potential sensitivity of this information, this file has 
+been excluded in the project's .gitignore file. However, a template for this file's structure can 
+be seen in the `app/settings-template.php` file.<br>
+*For convinience, files settings.php and settings-template.php will be referred to as the settings 
+and settings template.*
 
+To use the settings template, you must copy the file within the same directory and rename it as 
+`settings.php`. 
 
 #### Apache Setup
-The project may require SSL certificates to work properly. To this end, it is recommended to use **mkcert** to set up certification keys.
+The project may require SSL certificates to work properly. To this end, it is recommended to use 
+**mkcert** to set up certification keys.
  Many steps of this process are also outlined in the guide from [dockerwebdev.com](https://dockerwebdev.com/tutorials/docker-php-development).
 
 #### Steps
