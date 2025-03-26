@@ -17,40 +17,38 @@
   const allPosts = ref([]);
   const isSent = ref(false);
 
-  onMounted(() => {
+  onMounted(async () => {
     CurrentRoute.setRoute(useRoute().name)
 
-    PostService.getPosts()
-    .then((posts) => {
-      // Initialize allPosts value as the posts retrived from the API
-      allPosts.value = posts.data.data;
-    }).catch((error) => {
-      console.log(error.message);
-    })
+    const response = await PostService.getPosts()
+    if (response.statusCode == 200) {
+      allPosts.value = response.posts;
+    } else {
+      console.log(response.statusCode)
+      console.log(response.error)
+    }
   });
 
   async function updatePosts() {
-    PostService.getPosts()
-    .then((posts) => {
-      allPosts.value = posts.data.data;
+    await PostService.getPosts()
+    .then((response) => {
+      allPosts.value = response.posts
     }).catch((error) => {
-      console.log(error);
+      console.log(error)
     });
   }
 
   async function submitForm() {
     isSent.value = true
-    console.log(postText.value);
-    PostService.postPost(postText.value, CurrentUser.userId)
-    .then(() => {
-      postText.value = "";
-      updatePosts();
-      isSent.value = false;
-    }).catch((error) => {
-      console.log(error);
-      isSent.value = false;
-    });
+    const response = await PostService.createPost(postText.value, CurrentUser.userId)
 
+    console.log(response)
+
+    if (response.postSuccess) {
+      console.log("Post success!")
+      await updatePosts();
+    }
+    isSent.value = false;
   }
 
 </script>

@@ -19,23 +19,31 @@ watch(CurrentRoute, (route) => {
       <h3>The Single Page Forum</h3>
     </div>
     <nav class="heading-nav">
-      <RouterLink class="router-item" to="/">Home</RouterLink>
-      <RouterLink class="router-item" to="/about">About</RouterLink>
-      <RouterLink class="router-item" to="/users">Users</RouterLink>
       <RouterLink class="router-item" to="/posts">Posts</RouterLink>
+      <RouterLink class="router-item" to="/users">Users</RouterLink>
+      <RouterLink class="router-item" to="/about">About</RouterLink>
+      <RouterLink class="router-item" to="/">Home</RouterLink>
     </nav>
   </div>
   <main class = "wrapper-view">
     <div class="wrapper-item" v-if="!onHome">
       <h2><u>The One Page Forum!</u></h2>
       <div>
-        <p>Don't know what you're expecting here.</p><br />
-        <h3>Users</h3>
         <p>
+          Welcome to the One Page Forum! The following is a simple application which allows the
+          user to submit a post under the account name of one of four preset users. All comments
+          are then displayed on the associated 'Posts' section, in chronological order.
+        </p>
+        <p>
+          Demonstration of HTTP requests, Databases, and sorting. Each section below details how
+          each component was designed.
+        </p>
+        <h3>Users</h3>
+        <p class="comp-func">
           Displays the available list of user accounts.
         </p>
         <h3>Posts</h3>
-        <p>
+        <p class="comp-func">
           Displays all posts made to the post database.
         </p>
 
@@ -93,7 +101,7 @@ watch(CurrentRoute, (route) => {
 
   /* FLEX SETTINGS */
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   align-items:flex-end;
 }
 
