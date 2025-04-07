@@ -83,7 +83,7 @@ for the SSL certificate key. Both files should be then moved to the **phpapi/apa
 Enter the root directory.
 
 Run from the command line terminal
-```
+```bash
 docker-compose up -d
 ```
 
@@ -114,8 +114,9 @@ such.
   - Add message filtering
 - Update documentation for PHP and MySQL setup
 - Add .env files and variables to vue and php apps
+- Replace files in PHP application used for database connections
 
 ## Credits
 [Slim Skeleton](https://github.com/slimphp/Slim-Skeleton)
 
-The project's back end application uses code created by Ignacio X. Dominguez
+The project files DBPDO, DBPool, DBException and DBIterator.php were created by Ignacio X. Dominguez
