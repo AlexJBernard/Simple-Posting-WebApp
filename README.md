@@ -2,18 +2,27 @@
 ## About
 Runs a single-page web application made using PHP, Vue, and MySQL. Allows users to post comments to a single message board under one of four preset usernames.
 
-Was created using the PHP-Slim skeleton and Vue's Scaffolding for Single Page Applications.
+This project was created using the PHP-Slim skeleton and Vue's Scaffolding for Single Page Applications. 
 
 **WARNING:** This project may be in continuous development, and as such, certain sections may be 
 incomplete or outdated.
 
 # Table of Contents
-1. [Purpose](#purpose)
-2. [Running Program](#running-program)
-   1. [From Docker](#running-from-docker)
-   2. [Vue App](#running-vue-application-front-end)
-   3. [PHP App](#running-php-app-back-end)
-3. [To-Do List]()
+- [Simple Posting Web Application](#simple-posting-web-application)
+  - [About](#about)
+- [Table of Contents](#table-of-contents)
+  - [Purpose](#purpose)
+  - [Running Program](#running-program)
+    - [Running From Docker](#running-from-docker)
+      - [Settings.php (phpapp)](#settingsphp-phpapp)
+      - [Apache Setup](#apache-setup)
+      - [Steps](#steps)
+      - [Running](#running)
+    - [Running Vue Application (Front-End)](#running-vue-application-front-end)
+    - [Running PHP App (Back-End)](#running-php-app-back-end)
+  - [Running MySQL Database](#running-mysql-database)
+  - [To-Do List](#to-do-list)
+  - [Credits](#credits)
 
 ## Purpose
 The following program was made for me to practice and learn more about using PHP, Vue, MySQL, and 
@@ -74,7 +83,7 @@ for the SSL certificate key. Both files should be then moved to the **phpapi/apa
 Enter the root directory.
 
 Run from the command line terminal
-```
+```bash
 docker-compose up -d
 ```
 
@@ -105,3 +114,9 @@ such.
   - Add message filtering
 - Update documentation for PHP and MySQL setup
 - Add .env files and variables to vue and php apps
+- Replace files in PHP application used for database connections
+
+## Credits
+[Slim Skeleton](https://github.com/slimphp/Slim-Skeleton)
+
+The project files DBPDO, DBPool, DBException and DBIterator.php were created by Ignacio X. Dominguez
