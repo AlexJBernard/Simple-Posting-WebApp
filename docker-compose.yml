@@ -1,42 +1,47 @@
-name: SimplePostingApp
+name: simple-posts-app
+
+volumes:
+  db-data:
+    name: "PostingDatabase"
+
 services:
 # Web Application
-  simple-frontend:
-    build: ./vueapp
-    container_name: simple_frontend
+  posting-frontend:
+    build: ./PostingWebpage
+    container_name: posting_frontend
     restart: "no"
     ports:
       - "8080:8080"
     links:
-      - simple-backend
+      - posting-backend
     environment:
       docker: "true"
   
   # API
-  simple-backend:
-    build: ./phpapi
-    container_name: simple_backend
+  posting-backend:
+    build: ./PostingAPI
+    container_name: posting_backend
     restart: "no"
     ports:
       - "81:80"
       - "433:433"
     volumes:
-      - "./phpapi/logs:/var/www/html/phpapi/logs"
+      - "./PostingAPI/logs:/var/www/html/PostingAPI/logs"
     environment:
       docker: "true"
   
   # PHP Database  
-  simple-database:
+  posting-database:
     image: mysql:latest
-    container_name: simple_database
+    container_name: posting_database
     restart: "no"
     ports:
       - 3307:3306
     volumes:
       - "./testDatabase/schema:/docker-entrypoint-initdb.d"
-      #- ./testDatabase/data:/var/lib/mysql
+      - db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=r00T
-      - MYSQL_DATABASE=databasePhp
+      - MYSQL_DATABASE=postingDB
       - MYSQL_USER=username
       - MYSQL_PASSWORD=password

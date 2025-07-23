@@ -26,16 +26,16 @@ RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install curl ldap zip
 
 # Copy project code
-WORKDIR /var/www/html/phpapi
+WORKDIR /var/www/html/PostingAPI
 
 ## Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
-COPY ./composer* /var/www/html/phpapi
+COPY ./composer* /var/www/html/PostingAPI
 ENV COMPOSER_ALLOW_SUPERUSER=1 
 RUN composer install
 
 ## Copy project files
-COPY . /var/www/html/phpapi
+COPY . /var/www/html/PostingAPI
 
 # Run apache server
 COPY run.sh /

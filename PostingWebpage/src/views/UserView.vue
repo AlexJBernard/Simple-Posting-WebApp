@@ -6,7 +6,7 @@
   // JavaScript files
   import UserService from '../services/UserService.js'
   import { CurrentUser } from '../state/CurrentUser.js'
-  import { CurrentRoute } from '../state/CurrentRoute'
+  import { CurrentRoute } from '../state/CurrentRoute.js'
 
   const users = ref(null)
   const selectUser = ref(null)
@@ -51,4 +51,5 @@
 </template>
 
 <style scoped>
+
 </style>
